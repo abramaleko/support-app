@@ -17,7 +17,8 @@ defineProps({
     <!--Navbar-->
       <Navbar/>
 
-       <!--Hero-->
+     <div id="welcome">
+          <!--Hero-->
     <div class="pt-24">
       <div class="container flex flex-col flex-wrap items-center px-3 mx-auto md:flex-row">
         <!--Left Col-->
@@ -647,6 +648,21 @@ defineProps({
       <a href="https://www.freepik.com/free-photos-vectors/background" class="text-gray-500">Background vector created by freepik - www.freepik.com</a>
     </footer>
     <div class="leading-normal tracking-normal text-white gradient">
+     </div>
 
     </div>
 </template>
+
+<style scoped>
+        #welcome{
+            font-family: 'Source Sans Pro', sans-serif;
+            line-height: 1.5;
+            letter-spacing: 0em;
+            --tw-text-opacity: 1;
+            color: rgb(255 255 255 / var(--tw-text-opacity));
+            background: linear-gradient(90deg, #d53369 0%, #daae51 100%);
+            }
+            .gradient{
+    background: linear-gradient(90deg, #d53369 0%, #daae51 100%);
+           }
+        </style>
