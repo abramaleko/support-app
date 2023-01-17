@@ -15,7 +15,7 @@ const appName=usePage().props.value.appName;
        <!-- Header -->
        <div class="fixed z-10 flex items-center w-full text-white h-14">
         <div class="flex items-center justify-start pl-3 bg-blue-800 border-none md:justify-center w-14 md:w-64 h-14 dark:bg-gray-800">
-          <img class="mr-2 overflow-hidden rounded-md w-7 h-7 md:w-10 md:h-10" src="/images/logo.png" />
+          <img class="mr-2 overflow-hidden rounded-md w-7 h-7 md:w-10 md:h-10" src="/images/logo.jpg" />
           <span class="hidden md:block">{{appName}}</span>
         </div>
         <div class="flex items-center justify-end w-full bg-blue-800 h-14 dark:bg-gray-800 header-right">
@@ -96,13 +96,12 @@ const appName=usePage().props.value.appName;
             </Link>
             </li>
             <li>
-              <a href="#" class="relative flex flex-row items-center pr-6 border-l-4 border-transparent h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 hover:border-blue-500 dark:hover:border-gray-800">
+              <Link :href="route('issues.all')" class="relative flex flex-row items-center pr-6 border-l-4 border-transparent h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 hover:border-blue-500 dark:hover:border-gray-800">
                 <span class="inline-flex items-center justify-center ml-4">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path></svg>
                 </span>
                 <span class="ml-2 text-sm tracking-wide truncate">Issues</span>
-                <span class="hidden md:block px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-blue-500 bg-indigo-50 rounded-full">New</span>
-              </a>
+            </Link>
             </li>
             <li>
               <a href="#" class="relative flex flex-row items-center pr-6 border-l-4 border-transparent h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 hover:border-blue-500 dark:hover:border-gray-800">
