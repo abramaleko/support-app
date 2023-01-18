@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\IssuesController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SettingsController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -41,6 +42,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::get('/all',[IssuesController::class,'allIssues'])->name('issues.all');
     });
+
+
+    Route::get('/settings',[SettingsController::class,'showSettings'])->name('settings');
+    Route::post('setting/new-issue-category',[SettingsController::class,'newCategory'])->name('settings.issues-newCategory');
+
 });
 
 require __DIR__.'/auth.php';
