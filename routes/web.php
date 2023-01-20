@@ -41,6 +41,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('issues')->group(function(){
 
         Route::get('/all',[IssuesController::class,'allIssues'])->name('issues.all');
+
+        Route::post('/new-issue',[IssuesController::class,'newIssue'])->name('issues.new');
     });
 
 
