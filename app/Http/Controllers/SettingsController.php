@@ -4,11 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\IssuesCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+
 
 class SettingsController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('checkUserIsAdmin');
+    }
 
     public function showSettings()
     {

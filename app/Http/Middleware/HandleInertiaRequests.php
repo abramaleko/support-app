@@ -44,6 +44,8 @@ class HandleInertiaRequests extends Middleware
                 ]);
             },
             'appName' => config('app.name'),
+
+            'isAdmin' => $request->user() ? $request->user()->hasRole('Super-Admin') : false ,
         ]);
     }
 }

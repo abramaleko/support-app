@@ -5,6 +5,8 @@ import { usePage } from '@inertiajs/inertia-vue3';
 
 const appName=usePage().props.value.appName;
 
+const isAdmin=usePage().props.value.isAdmin;
+
 </script>
 
 
@@ -133,7 +135,7 @@ const appName=usePage().props.value.appName;
                 <span class="ml-2 text-sm tracking-wide truncate">Profile</span>
             </Link>
             </li>
-            <li>
+            <li v-if="isAdmin">
               <Link :href="route('settings')" class="relative flex flex-row items-center pr-6 border-l-4 border-transparent h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 hover:border-blue-500 dark:hover:border-gray-800">
                 <span class="inline-flex items-center justify-center ml-4">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -141,7 +143,7 @@ const appName=usePage().props.value.appName;
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                   </svg>
                 </span>
-                <span class="ml-2 text-sm tracking-wide truncate">Settings</span>
+                <span class="ml-2 text-sm tracking-wide truncate">Admin Settings</span>
             </Link>
             </li>
           </ul>
