@@ -121,7 +121,7 @@ function closeModal(){
 
                             <div v-else class="flex flex-wrap mt-1">
                                 <img src="/images/icons/calendar.png" class="w-5 h-5" alt="calendar" />
-                                <p class="ml-2 text-base">{{ moment(issue.created_at).format('MMMM d YYYY') }}</p>
+                                <p class="ml-2 text-base">{{ moment(issue.created_at).format('MMMM d` YYYY') }}</p>
 
                                 <p class="ml-2 font-light">, Not Assigned Yet (Open Issue) </p>
 
