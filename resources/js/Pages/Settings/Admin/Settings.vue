@@ -2,10 +2,14 @@
   import AuthLayout from '@/Layouts/AuthLayout.vue';
   import { Head } from '@inertiajs/inertia-vue3';
   import IssuesCategory from './IssuesCategory.vue';
+  import Permissions from './Permissions.vue';
 
   defineProps({
     issue_categories:{
         type:Object
+    },
+    permissions: {
+        type:Object,
     }
   });
 </script>
@@ -21,7 +25,7 @@
                 </div>
 
                 <div class="">
-                    <IssuesCategory :categories="issue_categories"/>
+                    <Permissions :permissions="permissions"/>
                 </div>
 
             </div>

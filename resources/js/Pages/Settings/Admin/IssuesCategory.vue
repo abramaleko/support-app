@@ -76,6 +76,10 @@ export default {
                           </button>
                       </td>
                     </tr>
+                    <p v-if=" !categories"
+                    class="px-4 py-2 text-sm italic">
+                         No data found
+                    </p>
                   </tbody>
                 </table>
               </div>
