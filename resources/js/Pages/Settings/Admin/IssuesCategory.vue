@@ -47,7 +47,7 @@ export default {
 </script>
 
 <template>
-        <div class="w-full min-w-0 mb-4 break-words rounded shadow-lg lg:mb-0 bg-gray-50 dark:bg-gray-800">
+        <div class="w-full min-w-0 mb-4 overflow-x-auto overflow-y-scroll break-words rounded shadow-lg lg:mb-0 bg-gray-50 dark:bg-gray-800 lg:h-72">
             <div class="px-0 mb-0 border-0 rounded-t">
               <div class="flex flex-wrap items-center px-4 py-2">
                 <div class="relative flex-1 flex-grow w-full max-w-full">
@@ -69,8 +69,8 @@ export default {
                   <tbody>
                     <tr v-for="category in categories" :key="category.id"
                     class="text-gray-700 dark:text-gray-100">
-                      <th class="p-4 px-4 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">{{category.name}}</th>
-                      <td class="p-4 px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+                      <th class="px-4 py-3 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">{{category.name}}</th>
+                      <td class="px-4 py-3 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
                           <button class="px-2 py-1 bg-red-600 rounded hover:bg-red-800">
                             DELETE
                           </button>
@@ -93,7 +93,7 @@ export default {
 				<div class="flex items-center justify-between pb-3">
 					<p class="text-2xl font-bold text-gray-900 dark:text-gray-50">Add Issue Category</p>
 					<div class="z-50 cursor-pointer modal-close" @click="closeModal">
-						<svg class="text-gray-500 fill-current" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+						<svg class="text-gray-500 fill-current hover:text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
 							viewBox="0 0 18 18">
 							<path
 								d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">

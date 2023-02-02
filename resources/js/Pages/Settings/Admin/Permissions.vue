@@ -5,7 +5,7 @@ defineProps({
 </script>
 
 <template>
-        <div class="w-full min-w-0 mb-4 break-words rounded shadow-lg lg:mb-0 bg-gray-50 dark:bg-gray-800">
+        <div class="w-full min-w-0 mb-4 overflow-y-scroll break-words rounded shadow-lg h-72 lg:mb-0 bg-gray-50 dark:bg-gray-800">
             <div class="px-0 mb-0 border-0 rounded-t">
               <div class="flex flex-wrap items-center px-4 py-2">
                 <div class="relative w-full max-w-full">
