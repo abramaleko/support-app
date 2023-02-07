@@ -22,6 +22,7 @@ class AdminSeeder extends Seeder
         $user=User::create([
             'name' => 'Super Admin',
             'email' => 'admin@domain.com',
+            'is_staff' => true,
             'password' => Hash::make('TicketHub@2023'),
         ]);
 
