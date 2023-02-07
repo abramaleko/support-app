@@ -6,11 +6,13 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "ahmedsaoud31/laravel-permission-to-vuejs": "dev-master",
         "guzzlehttp/guzzle": "^7.2",
         "inertiajs/inertia-laravel": "^0.6.3",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^2.8",
         "laravel/tinker": "^2.7",
+        "spatie/laravel-permission": "^5.8",
         "tightenco/ziggy": "^1.0"
     },
     "require-dev": {
