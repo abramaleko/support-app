@@ -21,7 +21,7 @@ return new class extends Migration
             $table->foreignId('issue_category_id')->constrained('issues_categories');
             $table->foreignId('issued_by')->constrained('users');
             $table->tinyInteger('status')->default(1)->comment('1-open,2-inprogress,3-closed');
-            $table->foreignId('assigned_to')->constrained('users')->nullable();
+            $table->foreignId('assigned_to')->nullable()->constrained('users');
             $table->longText('closing_description')->nullable();
             $table->timestamps();
         });
