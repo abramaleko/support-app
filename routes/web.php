@@ -48,7 +48,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/settings',[SettingsController::class,'showSettings'])->name('settings');
     Route::post('setting/new-issue-category',[SettingsController::class,'newCategory'])->name('settings.issues-newCategory');
+    Route::post('settings/new-staff',[SettingsController::class,'newStaff'])->name('settings.newStaff');
+    Route::post('/settings/staff/update-permissions',[SettingsController::class,'updatePermissions'])->name('settings.staff.updatePermissions');
 
 });
 
 require __DIR__.'/auth.php';
+;
