@@ -13,6 +13,7 @@ export default {
     props: {
         issue_categories: Object,
         issues: Object,
+        staff_permissions: Array,
     },
     data() {
         return {
@@ -30,18 +31,7 @@ export default {
         });
     },
     computed: {
-        issueStatus() {
-            if (this.selectedIssue.status == 1) {
-                return 'Open Issue (Not Assigned)'
-            }
-            if (this.selectedIssue.status == 2) {
-                return 'In Progress'
-            }
-            if (this.selectedIssue.status == 3) {
-                return 'Closed'
-            }
 
-        },
     },
     methods: {
         //create new issue
@@ -71,7 +61,19 @@ export default {
             setTimeout(() => {
                 modalToClose.style.display = 'none';
             }, 200);
-        }
+        },
+        issueStatus(status) {
+            if (status == 1) {
+                return 'Not Assigned'
+            }
+            if (status == 2) {
+                return 'In Progress'
+            }
+            if (status == 3) {
+                return 'Closed'
+            }
+
+        },
 
     }
 }
@@ -129,9 +131,13 @@ export default {
 
                 <!--issues-->
                 <div class="my-8">
-                    <p class="text-sm italic">
+                    <p v-if="!staff_permissions" class="text-sm italic lowercase">
                         Showing the latest issues
                     </p>
+                    <p v-else class="text-sm italic lowercase">
+                        Showing the latest {{ staff_permissions.toString() }} issues.
+                    </p>
+
                     <!-- Issue-->
                     <div v-for="issue in issues" :key="issue.id"
                         class="grid grid-cols-4 gap-8 p-4 my-4 border border-gray-100 rounded">
@@ -158,9 +164,10 @@ export default {
                             </p>
                             <div class="flex mt-2 ml-1">
                                 <!-- <p class="px-2 py-1 ml-2 text-xs font-light text-white bg-gray-700 rounded-md">Open Issue </p> -->
-                                <p class="px-2 py-1 ml-2 text-xs font-light text-white bg-green-500 rounded-md">In
-                                    Progress</p>
-
+                                <p :class="{ 'bg-gray-700': issue.status == 1, 'bg-green-500':issue.status==2,'bg-red-500':issue.status==3}"
+                                    class="px-2 py-1 ml-2 text-xs font-light text-white rounded-md">
+                                    {{ issueStatus(issue.status) }}
+                                </p>
                             </div>
 
                         </div>
@@ -308,7 +315,7 @@ export default {
                         </p>
                         <p class="mb-2 text-lg font-bold">
                             Issue status : <span class="font-light text-green-500">
-                                {{ issueStatus }}
+                                {{ issueStatus(selectedIssue.status) }}
                             </span>
                         </p>
                     </div>
