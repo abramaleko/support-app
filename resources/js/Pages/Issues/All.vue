@@ -3,8 +3,6 @@
 import { Head, useForm } from '@inertiajs/inertia-vue3';
 import AuthLayout from '@/Layouts/AuthLayout.vue';
 import moment from 'moment';
-import { ref } from 'vue';
-import { onUpdated } from 'vue';
 
 export default {
     components: {
