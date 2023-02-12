@@ -306,6 +306,11 @@ export default {
                                 {{ selectedIssue.issue_category.name }}
                             </span>
                         </p>
+                        <p class="mb-2 text-lg font-bold" v-if="selectedIssue.issue_category">
+                            Requested By : <span class="font-light text-green-500">
+                                {{ selectedIssue.issued_by.name }}
+                            </span>
+                        </p>
                         <p class="mb-2 text-lg font-bold">
                             Created at : <span class="font-light text-green-500">
                                 {{ moment(selectedIssue.created_at).format('MMMM d YYYY, h:mm:ss a') }}
@@ -319,6 +324,9 @@ export default {
                     </div>
                     <!--Footer-->
                     <div class="flex justify-end ">
+                        <button class="p-3 px-4 mr-4 font-semibold text-white bg-blue-500 rounded hover:bg-blue-600">
+                           Respond</button>
+
                         <button class="p-3 px-4 font-semibold text-black bg-gray-200 rounded hover:bg-gray-300"
                             @click="closeModal('issue_selected')">Close</button>
                     </div>
