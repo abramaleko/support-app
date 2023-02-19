@@ -31,4 +31,11 @@ class Issues extends Model
 
         return $this->belongsTo(User::class,'assigned_to');
     }
+
+    /*
+      Get the chats for the issue
+     */
+    public function chats(){
+        return $this->hasMany(IssueHistory::class,'issue_id');
+    }
 }
