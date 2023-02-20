@@ -2,8 +2,9 @@
 import { Link } from '@inertiajs/inertia-vue3';
 import { usePage } from '@inertiajs/inertia-vue3';
 
-
 const appName=usePage().props.value.appName;
+
+const isStaff=usePage().props.value.isStaff;
 
 </script>
 
@@ -95,6 +96,22 @@ const appName=usePage().props.value.appName;
                 <span class="ml-2 text-sm tracking-wide truncate">Dashboard</span>
             </Link>
             </li>
+            <li v-if="isStaff">
+              <Link :href="route('staff.messages')" class="relative flex flex-row items-center pr-6 border-l-4 border-transparent h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 hover:border-blue-500 dark:hover:border-gray-800">
+                <span class="inline-flex items-center justify-center ml-4">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path></svg>
+                </span>
+                <span class="ml-2 text-sm tracking-wide truncate">Messages</span>
+            </Link>
+            </li>
+            <li v-else>
+              <Link :href="route('messages')" class="relative flex flex-row items-center pr-6 border-l-4 border-transparent h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 hover:border-blue-500 dark:hover:border-gray-800">
+                <span class="inline-flex items-center justify-center ml-4">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path></svg>
+                </span>
+                <span class="ml-2 text-sm tracking-wide truncate">Messages</span>
+            </Link>
+            </li>
             <li>
               <Link :href="route('issues.all')" class="relative flex flex-row items-center pr-6 border-l-4 border-transparent h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 hover:border-blue-500 dark:hover:border-gray-800">
                 <span class="inline-flex items-center justify-center ml-4">
@@ -102,14 +119,6 @@ const appName=usePage().props.value.appName;
                 </span>
                 <span class="ml-2 text-sm tracking-wide truncate">Issues</span>
             </Link>
-            </li>
-            <li>
-              <a href="#" class="relative flex flex-row items-center pr-6 border-l-4 border-transparent h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 hover:border-blue-500 dark:hover:border-gray-800">
-                <span class="inline-flex items-center justify-center ml-4">
-                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path></svg>
-                </span>
-                <span class="ml-2 text-sm tracking-wide truncate">Messages</span>
-              </a>
             </li>
             <li>
               <a href="#" class="relative flex flex-row items-center pr-6 border-l-4 border-transparent h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 hover:border-blue-500 dark:hover:border-gray-800">
