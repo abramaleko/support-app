@@ -44,8 +44,11 @@ class HandleInertiaRequests extends Middleware
                 ]);
             },
             'appName' => config('app.name'),
-
-            'isAdmin' => $request->user() ? $request->user()->hasRole('Super-Admin') : false ,
+            'isStaff' => function () use ($request){
+                 if ($request->user()) {
+                  return  $request->user()->is_staff ? true : false ;
+                 }
+            },
         ]);
     }
 }
