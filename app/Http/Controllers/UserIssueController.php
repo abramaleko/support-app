@@ -20,14 +20,15 @@ class UserIssueController extends Controller
      {
        //get all the assigned issues in latest order
        $issues=Issues::with(['chats'=>function($query){
-         return $query->first();
-        }])
+        return $query->orderBy('id','desc')->first();
+    }])
          ->where('issued_by',Auth::user()->id)
          ->orderBy('id','desc')
          ->get();
 
          return Inertia::render('UserIssues/AllMessages',[
              'issues' => $issues,
+             'user_id' => Auth::user()->id,
          ]);
      }
 
@@ -36,14 +37,20 @@ class UserIssueController extends Controller
         $issue=Issues::where('issue_id',$issue_id)
         ->with(['issuedBy:id,name','assignedTo:id,name'])->first();
 
+           //if the user is not the creator of the issue
+        if ($issue->issued_by != Auth::user()->id) {
+            abort(403, 'Unauthorized action.');
+        }
+
         //get messages
         $messages=IssueHistory::where('issue_id',$issue->id)->get();
 
-        //if the staff is not assigned to issue abort
-        if ($issue->issued_by != Auth::user()->id) {
-        abort(403, 'Unauthorized action.');
-    }
-
+        //check who sent the last message if not the the admin update it to read
+        $message=$messages->last();
+        if ($message && $message->user_id != Auth::user()->id) {
+            $message->read=true;
+            $message->save();
+        }
         return Inertia::render('UserIssues/ViewMessage',[
             'issue' => $issue,
             'messages' =>$messages,
@@ -60,6 +67,5 @@ class UserIssueController extends Controller
         $chat->save();
 
         return to_route('user.view-message',$request->issue_code);
-
      }
 }

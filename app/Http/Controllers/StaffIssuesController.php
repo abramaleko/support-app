@@ -21,16 +21,15 @@ class StaffIssuesController extends Controller
      {
         //get all the assigned issues in latest order
         $issues=Issues::with(['chats'=>function($query){
-            return $query->first();
+            return $query->orderBy('id','desc')->first();
            }])
             ->where('assigned_to',Auth::user()->id)
             ->orderBy('id','desc')
             ->get();
 
-            // dd($issues);
-
         return Inertia::render('StaffIssues/AllMessages',[
             'issues' => $issues,
+            'user_id' => Auth::user()->id,
         ]);
      }
 
@@ -41,13 +40,20 @@ class StaffIssuesController extends Controller
         $issue=Issues::where('issue_id',$issue_id)
         ->with(['issuedBy:id,name','assignedTo:id,name'])->first();
 
+               //if the staff is not assigned to issue abort
+               if ($issue->assigned_to != Auth::user()->id) {
+                abort(403, 'Unauthorized action.');
+            }
+
         //get messages
         $messages=IssueHistory::where('issue_id',$issue->id)->get();
 
-        //if the staff is not assigned to issue abort
-        if ($issue->assigned_to != Auth::user()->id) {
-        abort(403, 'Unauthorized action.');
-    }
+        //check who sent the last message if not the the admin update it to read
+        $message=$messages->last();
+        if ($message && $message->user_id != Auth::user()->id) {
+            $message->read=true;
+            $message->save();
+        }
 
         return Inertia::render('StaffIssues/ViewMessage',[
             'issue' => $issue,
@@ -64,7 +70,6 @@ class StaffIssuesController extends Controller
         $issue->save();
 
         return to_route('staff.view-message',$issue->issue_id);
-
      }
 
      public function sendMessage(Request $request){
@@ -77,6 +82,5 @@ class StaffIssuesController extends Controller
         $chat->save();
 
         return to_route('staff.view-message',$request->issue_code);
-
      }
 }
