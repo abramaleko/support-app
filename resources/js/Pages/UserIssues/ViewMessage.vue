@@ -9,8 +9,7 @@ export default {
     },
     mounted(){
         //scroll to the bottom
-        var objDiv = document.getElementById("messages");
-         objDiv.scrollTop = objDiv.scrollHeight;
+        this.scrollBottom();
     },
     props:{
         issue : Object,
@@ -37,9 +36,16 @@ export default {
          {
             onSuccess:(page) => {
             this.input_message=null;
+            this.scrollBottom();
+
           },
          }
           );
+        },
+        scrollBottom()
+        {
+        var objDiv = document.getElementById("messages");
+         objDiv.scrollTop = objDiv.scrollHeight;
         }
     }
 
