@@ -46,7 +46,9 @@ class IssuesController extends Controller
     {
         if ($user->hasRole('Super-Admin')) {
             //gets all the issues
-            $openIssues=Issues::with(['issueCategory','issuedBy:id,name','assignedTo:id,name'])->orderBy('id','desc')->get();
+            $openIssues=Issues::with(['issueCategory','issuedBy:id,name','assignedTo:id,name'])
+            ->where('status',1)
+            ->orderBy('id','desc')->get();
             return $openIssues;
           }
           else {
@@ -58,7 +60,9 @@ class IssuesController extends Controller
                 array_push($staff_permissions,$name);
                 }
 
-                $allIssues=Issues::with(['issueCategory','issuedBy:id,name','assignedTo:id,name'])->orderBy('id','desc')->get();
+                $allIssues=Issues::with(['issueCategory','issuedBy:id,name','assignedTo:id,name'])
+                ->where('status',1)
+                ->orderBy('id','desc')->get();
 
                 //get the issues which the user has permissions to manage
                 $openIssues=$allIssues->whereIn('issueCategory.name',$staff_permissions);
