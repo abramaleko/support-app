@@ -86,6 +86,8 @@ export default {
                                 - {{ issue.title }}
                                 <span v-if="newMessageBadge(issue)"
                                  class="px-2 py-1 ml-2 text-xs text-white bg-blue-500 rounded-md"> New</span>
+                                 <span v-if="issue.status === 3"
+                                 class="px-2 py-1 ml-2 text-xs text-white bg-red-500 rounded-md"> Closed</span>
                             </h3>
                             <p class="text-sm font-light">{{ user_id == issue.chats[0].user_id ? 'Me' : 'Message' }}:
                                 {{ checkLatestMsg(issue.chats) }}</p>
