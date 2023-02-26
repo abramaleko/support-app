@@ -50,6 +50,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/message/{issue_id}',[StaffIssuesController::class,'viewChat'])->name('staff.view-message');
         Route::post('/assign-issue',[StaffIssuesController::class,'getAssignedIssue'])->name('staff.get-assigned-issue');
         Route::post('/send-message',[StaffIssuesController::class,'sendMessage'])->name('staff.send-message');
+
+        Route::post('/close-issue',[StaffIssuesController::class,'closeIssue'])->name('close-issue');
     });
 
     //normal user meesages
