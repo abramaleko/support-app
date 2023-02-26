@@ -424,7 +424,17 @@ export default {
                             View messages
                         </Link>
                            </div>
+                       </div>
 
+                       <div v-if="selectedIssue.status == 3">
+                        <div class="py-2 border-t border-white border-dashed"></div>
+                        <p class="italic ">
+                           This issue has been marked closed on {{  moment(selectedIssue.updated_At).format('dddd, MMMM Do YYYY') }}
+                           you can follow up
+                           <Link :href="route('user.view-message',selectedIssue.issue_id)" class="text-green-500 hover:underline">
+                             here
+                           </Link>
+                        </p>
                        </div>
                     </div>
                     <!--Footer-->
