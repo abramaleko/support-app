@@ -50,7 +50,8 @@ export default {
                 <div class="flex justify-between">
                     <div class="">
                         <h2 class="text-2xl font-semibold text-gray-900 dark:text-gray-50">Issue Messages
-                            <span class="text-xs font-light">(230)</span>
+                            <span v-if="issues.length > 0"
+                            class="text-xs font-light">( {{ issues.length }}  )</span>
                         </h2>
                     </div>
 
