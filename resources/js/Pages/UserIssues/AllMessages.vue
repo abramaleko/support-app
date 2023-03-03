@@ -27,12 +27,12 @@ export default {
            }
         },
         newMessageBadge(issue){
-          //show the badge only if the last message is not current user
-         if (this.user_id != issue.chats[0].user_id) {
-            //show badge when the last message is not read or there are no last messages
-          if (!issue.chats[0].read || !issue.chats) {
-             return true;
-          }
+            //if chats are there
+        if (issue.chats[0]) {
+              //show the badge only if the last message is not current user and message not read
+         if (this.user_id != issue.chats[0].user_id && !issue.chats[0].read) {
+           return true;
+        }
         }
         return false;
         }
@@ -89,7 +89,12 @@ export default {
                                  <span v-if="issue.status === 3"
                                  class="px-2 py-1 ml-2 text-xs text-white bg-red-500 rounded-md"> Closed</span>
                             </h3>
-                            <p class="text-sm font-light">{{ user_id == issue.chats[0].user_id ? 'Me' : 'Message' }}:
+                            <p v-if="!issue.chats[0]"
+                            class="text-sm font-light">Me:
+                                {{ issue.description }}</p>
+
+                            <p v-if="issue.chats[0]"
+                            class="text-sm font-light">{{ user_id == issue.chats[0].user_id ? 'Me' : 'Message' }}:
                                 {{ checkLatestMsg(issue.chats) }}</p>
                             <p class="pt-1 text-xs italic font-light text-green-500">Issued on {{ moment(issue.created_at).format('d MMMM YYYY') }}</p>
                         </div>
