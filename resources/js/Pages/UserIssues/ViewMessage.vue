@@ -2,6 +2,7 @@
 import { Head,Link } from '@inertiajs/inertia-vue3';
 import { Inertia } from '@inertiajs/inertia'
 import AuthLayout from '@/Layouts/AuthLayout.vue';
+import moment from 'moment';
 
 export default {
     components: {
@@ -18,6 +19,8 @@ export default {
     data(){
         return {
             input_message: null,
+            moment: moment,
+
         }
     },
     methods:{
@@ -92,7 +95,7 @@ export default {
                                             <p class="text-sm"> {{ issue.description }}
                                             </p>
                                         </div>
-                                        <span class="text-xs leading-none text-gray-500">2 min ago</span>
+                                        <span class="text-xs leading-none text-gray-500">{{ moment(issue.created_at).startOf('min').fromNow() }}</span>
                                     </div>
                                 </div>
                                 <!--messages-->
@@ -106,7 +109,7 @@ export default {
                                                 {{ message.text }}
                                             </p>
                                         </div>
-                                        <span class="text-xs leading-none text-gray-500">2 min ago</span>
+                                        <span class="text-xs leading-none text-gray-500">{{ moment(message.created_at).startOf('min').fromNow() }}</span>
                                     </div>
                                     <div class="flex-shrink-0 w-10 h-10 bg-gray-300 rounded-full"></div>
                                 </div>
@@ -120,18 +123,34 @@ export default {
                                                 {{ message.text }}
                                             </p>
                                         </div>
-                                        <span class="text-xs leading-none text-gray-500">2 min ago</span>
+                                        <span class="text-xs leading-none text-gray-500">{{ moment(message.created_at).startOf('min').fromNow() }}</span>
                                     </div>
                                 </div>
                                 </div>
                             </div>
 
-                            <div class="p-4 bg-gray-300">
+                            <div v-if="issue.status === 2"
+                            class="p-4 bg-gray-300">
                                 <input @keyup.enter="submitMessage"
                                 v-model="input_message"
                                 class="flex items-center w-full h-10 px-3 text-sm rounded" type="text"
                                     placeholder="Type your message…">
                             </div>
+
+                            <div v-if="issue.status == 3">
+                                <div class="py-2 border-t border-white border-dashed"></div>
+                               <div class="p-4 ">
+                                <p class="italic text-white"
+                                >This issue has been marked closed on {{  moment(issue.updated_At).format('dddd, MMMM Do YYYY') }}</p>
+                                <p class="py-1 text-green-500">
+                                     Reason :
+                                </p>
+                                <p class="italic text-white">
+                                   {{ issue.closing_description }}
+                                </p>
+                               </div>
+                            </div>
+
                         </div>
                         <!-- Component End  -->
 

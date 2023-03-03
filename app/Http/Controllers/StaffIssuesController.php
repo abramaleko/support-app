@@ -83,4 +83,19 @@ class StaffIssuesController extends Controller
 
         return to_route('staff.view-message',$request->issue_code);
      }
+
+     public function closeIssue(Request $request)
+     {
+       $request->validate([
+        'close_issue' => 'string'
+       ]);
+
+       $issue=Issues::find($request->issue_id);
+       $issue->status=3;
+       $issue->closing_description=$request->close_issue;
+       $issue->save();
+
+       return to_route('staff.view-message',$issue->issue_id);
+
+     }
 }
