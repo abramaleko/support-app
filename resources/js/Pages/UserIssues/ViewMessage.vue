@@ -95,7 +95,7 @@ export default {
                                             <p class="text-sm"> {{ issue.description }}
                                             </p>
                                         </div>
-                                        <span class="text-xs leading-none text-gray-500">2 min ago</span>
+                                        <span class="text-xs leading-none text-gray-500">{{ moment(issue.created_at).startOf('min').fromNow() }}</span>
                                     </div>
                                 </div>
                                 <!--messages-->
@@ -109,7 +109,7 @@ export default {
                                                 {{ message.text }}
                                             </p>
                                         </div>
-                                        <span class="text-xs leading-none text-gray-500">2 min ago</span>
+                                        <span class="text-xs leading-none text-gray-500">{{ moment(message.created_at).startOf('min').fromNow() }}</span>
                                     </div>
                                     <div class="flex-shrink-0 w-10 h-10 bg-gray-300 rounded-full"></div>
                                 </div>
@@ -123,7 +123,7 @@ export default {
                                                 {{ message.text }}
                                             </p>
                                         </div>
-                                        <span class="text-xs leading-none text-gray-500">2 min ago</span>
+                                        <span class="text-xs leading-none text-gray-500">{{ moment(message.created_at).startOf('min').fromNow() }}</span>
                                     </div>
                                 </div>
                                 </div>
