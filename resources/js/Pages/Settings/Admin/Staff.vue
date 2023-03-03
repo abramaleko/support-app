@@ -1,5 +1,6 @@
 <script>
 import { useForm } from '@inertiajs/inertia-vue3';
+import { Inertia } from '@inertiajs/inertia'
 import moment from 'moment';
 
 export default {
@@ -50,7 +51,7 @@ export default {
                 preserveScroll: true,
                 onSuccess: () => {
                    this.formUser.reset();
-                    this.closeModal();
+                    this.closeModal('user_modal');
                 }
             })
         },
@@ -75,6 +76,15 @@ export default {
                 alert('You can not delete a Super Administrator');
                 return false;
             }
+            Inertia.post(route('settings.deleteStaff'),{
+                user_id:this.selectedUser.id
+          },
+           {
+            onSuccess:(page) => {
+                this.closeModal('user_selected')
+               },
+          });
+
         },
         selectUserEvent(user) {
             //hides the update permissions section

@@ -65,6 +65,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/', [SettingsController::class, 'showSettings'])->name('settings');
         Route::post('/new-issue-category', [SettingsController::class, 'newCategory'])->name('settings.issues-newCategory');
         Route::post('/new-staff', [SettingsController::class, 'newStaff'])->name('settings.newStaff');
+        Route::post('/delete-staff',[SettingsController::class,'deleteStaff'])->name('settings.deleteStaff');
         Route::post('/staff/update-permissions', [SettingsController::class, 'updatePermissions'])->name('settings.staff.updatePermissions');
     });
 

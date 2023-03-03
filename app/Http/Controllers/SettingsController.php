@@ -92,6 +92,19 @@ class SettingsController extends Controller
         return to_route('settings');
     }
 
+    public function deleteStaff(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required'
+        ]);
+        
+        $user=User::find($request->user_id);
+        $user->delete();
+
+        return to_route('settings');
+
+    }
+
     public function updatePermissions(Request $request)
     {
         $request->validate([
