@@ -1,8 +1,8 @@
 {
-    "name": "laravel/laravel",
+    "name": "TicketHub",
     "type": "project",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "description": "Support ticketing app.",
+    "keywords": ["issues","tickets","support"],
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
