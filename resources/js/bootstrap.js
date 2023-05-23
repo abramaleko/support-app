@@ -25,23 +25,14 @@ window.Pusher = Pusher;
 
 window.Echo = new Echo({
     broadcaster: 'pusher',
-    key: import.meta.env.VITE_PUSHER_APP_KEY,
-    wsHost: import.meta.env.VITE_PUSHER_HOST,
-    wsPort: 'pusher',
-    forceTLS: false,
-    encrypted: true,
-    disableStats: true,
-    enabledTransports: ['ws', 'wss'],
-    cluster:import.meta.env.VITE_PUSHER_APP_CLUSTER,
-
+    key: '159d930816a580ebdb93',
+    cluster: 'mt1',
+    forceTLS: true
 });
 
-// window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: import.meta.env.VITE_PUSHER_APP_KEY,
-//     wsHost: import.meta.env.VITE_PUSHER_HOST ? import.meta.env.VITE_PUSHER_HOST : `ws-${import.meta.env.VITE_PUSHER_APP_CLUSTER}.pusher.com`,
-//     wsPort: import.meta.env.VITE_PUSHER_HOST,
-//     wssPort: import.meta.env.VITE_PUSHER_PORT ?? 443,
-//     forceTLS: (import.meta.env.VITE_PUSHER_SCHEME ?? 'https') === 'https',
-//     enabledTransports: ['ws', 'wss'],
-// });
+// Register Axios interceptor
+window.axios.interceptors.request.use((config) => {
+    config.headers['X-Socket-ID'] = window.Echo.socketId();
+    return config;
+});
+

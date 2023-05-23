@@ -1,95 +1,3 @@
-<script>
-import { Head,Link,useForm } from '@inertiajs/inertia-vue3';
-import { Inertia } from '@inertiajs/inertia'
-import AuthLayout from '@/Layouts/AuthLayout.vue';
-import moment from 'moment';
-
-
-export default {
-    components: {
-        Head, AuthLayout,Link
-    },
-    mounted(){
-        //scroll to the bottom
-        this.scrollBottom();
-
-         //innitalizes the form on component mount
-         this.closeIssueForm = useForm({
-            close_issue: null,
-            issue_id: this.issue.id,
-        });
-    },
-    props:{
-        issue : Object,
-        messages: Object,
-    },
-    data(){
-        return {
-            input_message: null,
-            closeIssueForm:Object,
-            moment: moment,
-        }
-    },
-    computed:{
-        openModal() {
-            const modalToOpen = document.getElementById('close_issue');
-            modalToOpen.classList.remove('fadeOut');
-            modalToOpen.classList.add('fadeIn');
-            modalToOpen.style.display = 'flex';
-        },
-        closeModal() {
-            const modalToClose = document.getElementById('close_issue');
-            modalToClose.classList.remove('fadeIn');
-            modalToClose.classList.add('fadeOut');
-            setTimeout(() => {
-                modalToClose.style.display = 'none';
-            }, 200);
-        },
-    },
-    methods:{
-        submitMessage(){
-
-            if(!this.input_message){
-                alert('You can not send an empy message');
-                return false;
-            }
-
-            Inertia.post(route('staff.send-message'),{
-            issue_id: this.issue.id,
-            issue_code:this.issue.issue_id,
-            text: this.input_message,
-          },
-         {
-            onSuccess:(page) => {
-            this.input_message=null;
-            this.scrollBottom();
-
-          },
-         }
-          );
-        },
-        scrollBottom()
-        {
-        var objDiv = document.getElementById("messages");
-         objDiv.scrollTop = objDiv.scrollHeight;
-        },
-        closeIssue(){
-        //  console.log(this.closeIssueForm);
-         this.closeIssueForm.post(route('close-issue'), {
-                preserveScroll: true,
-                onSuccess: () => {
-                    this.closeIssueForm.reset();
-                    this.closeModal();
-                }
-            })
-        }
-
-
-    }
-
-}
-</script>
-
 <template>
 
     <Head title="Messages" />
@@ -248,6 +156,126 @@ export default {
 
     </AuthLayout>
 
-
-
 </template>
+
+<script>
+import { Head,Link,useForm, usePage} from '@inertiajs/inertia-vue3';
+import AuthLayout from '@/Layouts/AuthLayout.vue';
+import moment from 'moment';
+
+
+export default {
+    components: {
+        Head, AuthLayout,Link
+    },
+    mounted(){
+        window.Echo
+       .join(`Chat.${this.issue.id}`)
+       .here(users => {
+             console.log('You have just joined the channel.');
+             console.log(users);
+            })
+        .joining(user => {
+        console.log('A new user joined the channel: ', user);
+        })
+        .leaving(user => {
+            console.log('A user left the channel: ', user);
+        })
+        .listen('.new-message', (e) => {
+            this.messages.push({
+                text: e.message,
+                user_id: e.sender_id
+            });
+            this.scrollBottom();
+        });
+
+        //scroll to the bottom
+        this.scrollBottom();
+
+         //innitalizes the form on component mount
+         this.closeIssueForm = useForm({
+            close_issue: null,
+            issue_id: this.issue.id,
+        });
+    },
+    props:{
+        issue : Object,
+        messages: Object,
+    },
+    data(){
+        return {
+            input_message: null,
+            closeIssueForm:Object,
+            moment: moment,
+        }
+    },
+    computed:{
+        openModal() {
+            const modalToOpen = document.getElementById('close_issue');
+            modalToOpen.classList.remove('fadeOut');
+            modalToOpen.classList.add('fadeIn');
+            modalToOpen.style.display = 'flex';
+        },
+        closeModal() {
+            const modalToClose = document.getElementById('close_issue');
+            modalToClose.classList.remove('fadeIn');
+            modalToClose.classList.add('fadeOut');
+            setTimeout(() => {
+                modalToClose.style.display = 'none';
+            }, 200);
+        },
+    },
+    methods:{
+        submitMessage(){
+
+            if(!this.input_message){
+                alert('You can not send an empy message');
+                return false;
+            }
+
+               //adds message to list
+               this.messages.push({
+                text: this.input_message,
+                user_id: usePage().props.value.auth.user.id,
+            });
+
+            this.$inertia.visit(route('staff.send-message'),{
+                method: 'post',
+                preserveScroll:true,
+                only: [],
+                data:{
+                    issue_id: this.issue.id,
+                    issue_code:this.issue.issue_id,
+                    text: this.input_message,
+                },
+                headers:{
+                 'X-Socket-ID' : window.Echo.socketId(),
+                },
+                onSuccess: page => {
+                    this.input_message=null;
+                    this.scrollBottom();
+                }
+            })
+
+            this.scrollBottom();
+        },
+        scrollBottom()
+        {
+        var objDiv = document.getElementById("messages");
+         objDiv.scrollTop = objDiv.scrollHeight;
+        },
+        closeIssue(){
+        //  console.log(this.closeIssueForm);
+         this.closeIssueForm.post(route('close-issue'), {
+                preserveScroll: true,
+                onSuccess: () => {
+                    this.closeIssueForm.reset();
+                    this.closeModal();
+                }
+            })
+        }
+
+    }
+
+}
+</script>

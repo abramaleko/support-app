@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\Chat;
 use App\Models\IssueHistory;
 use App\Models\Issues;
 use Illuminate\Http\Request;
@@ -36,7 +37,6 @@ class StaffIssuesController extends Controller
 
      //view the chats
      public function viewChat($issue_id){
-
         $issue=Issues::where('issue_id',$issue_id)
         ->with(['issuedBy:id,name','assignedTo:id,name'])->first();
 
@@ -74,12 +74,15 @@ class StaffIssuesController extends Controller
 
      public function sendMessage(Request $request){
         $this->validate($request,['text' => 'required|string']);
+        $user=Auth::user()->id;
 
         $chat=new IssueHistory();
         $chat->issue_id=$request->issue_id;
-        $chat->user_id=Auth::user()->id;
+        $chat->user_id=$user;
         $chat->text=$request->text;
         $chat->save();
+
+        broadcast(new Chat($request->issue_id, $request->text,$user))->toOthers();
 
         return to_route('staff.view-message',$request->issue_code);
      }

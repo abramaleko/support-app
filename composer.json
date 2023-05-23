@@ -1,5 +1,5 @@
 {
-    "name": "TicketHub",
+    "name": "laravel/laravel",
     "type": "project",
     "description": "Support ticketing app.",
     "keywords": ["issues","tickets","support"],
@@ -12,6 +12,7 @@
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^2.8",
         "laravel/tinker": "^2.7",
+        "pusher/pusher-php-server": "^7.0",
         "spatie/laravel-permission": "^5.8",
         "tightenco/ziggy": "^1.0"
     },

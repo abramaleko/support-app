@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\Chat;
 use App\Http\Controllers\IssuesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingsController;
