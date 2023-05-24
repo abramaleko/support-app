@@ -121,33 +121,35 @@ export default {
         Head, AuthLayout,Link
     },
     mounted(){
-        window.Echo
-       .join(`Chat.${this.issue.id}`)
-       .here(users => {
-             users.forEach(user => {
-                if (user.id == this.issue.assigned_to.id) {
-                this.userOnline=true;
-                 }
-             });
-            })
-        .joining(user => {
-            if (user.id == this.issue.assigned_to.id) {
-                this.userOnline=true;
-             }
-        })
-        .leaving(user => {
-            console.log('A user left the channel: ', user);
-            if (user.id == this.issue.assigned_to.id) {
-              this.userOnline=false;
-            }
-        })
-        .listen('.new-message', (e) => {
-            this.messages.push({
-                text: e.message,
-                user_id: e.sender_id
-            });
-            this.scrollBottom();
-        });
+        if (this.issue.status !=3) {
+            window.Echo
+                .join(`Chat.${this.issue.id}`)
+                .here(users => {
+                        users.forEach(user => {
+                            if (user.id == this.issue.assigned_to.id) {
+                            this.userOnline=true;
+                            }
+                        });
+                        })
+                    .joining(user => {
+                        if (user.id == this.issue.assigned_to.id) {
+                            this.userOnline=true;
+                        }
+                    })
+                    .leaving(user => {
+                        console.log('A user left the channel: ', user);
+                        if (user.id == this.issue.assigned_to.id) {
+                        this.userOnline=false;
+                        }
+                    })
+                    .listen('.new-message', (e) => {
+                        this.messages.push({
+                            text: e.message,
+                            user_id: e.sender_id
+                        });
+                        this.scrollBottom();
+                    });
+        }
 
         //scroll to the bottom
         this.scrollBottom();

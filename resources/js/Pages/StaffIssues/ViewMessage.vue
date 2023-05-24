@@ -173,32 +173,37 @@ export default {
         Head, AuthLayout,Link
     },
     mounted(){
+        console.log(this.issue);
+        //check if issue is not closed if not subscribe to channel
+        if (this.issue.status !=3) {
         window.Echo
-       .join(`Chat.${this.issue.id}`)
-       .here(users => {
-             users.forEach(user => {
+        .join(`Chat.${this.issue.id}`)
+        .here(users => {
+                users.forEach(user => {
+                    if (user.id == this.issue.issued_by.id) {
+                    this.userOnline=true;
+                    }
+                });
+                })
+            .joining(user => {
                 if (user.id == this.issue.issued_by.id) {
-                this.userOnline=true;
-                 }
-             });
+                    this.userOnline=true;
+                }
             })
-        .joining(user => {
-            if (user.id == this.issue.issued_by.id) {
-                this.userOnline=true;
-             }
-        })
-        .leaving(user => {
-            if (user.id == this.issue.issued_by.id) {
-              this.userOnline=false;
-            }
-        })
-        .listen('.new-message', (e) => {
-            this.messages.push({
-                text: e.message,
-                user_id: e.sender_id
-            });
-            this.scrollBottom();
+            .leaving(user => {
+                if (user.id == this.issue.issued_by.id) {
+                this.userOnline=false;
+                }
+            })
+            .listen('.new-message', (e) => {
+                this.messages.push({
+                    text: e.message,
+                    user_id: e.sender_id
+                });
+                this.scrollBottom();
         });
+
+        }
 
         //scroll to the bottom
         this.scrollBottom();
