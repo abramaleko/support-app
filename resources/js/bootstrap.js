@@ -30,9 +30,4 @@ window.Echo = new Echo({
     forceTLS: true
 });
 
-// Register Axios interceptor
-window.axios.interceptors.request.use((config) => {
-    config.headers['X-Socket-ID'] = window.Echo.socketId();
-    return config;
-});
 
