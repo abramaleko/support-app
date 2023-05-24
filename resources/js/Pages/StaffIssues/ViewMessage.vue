@@ -12,6 +12,10 @@
                         <p class="font-serif text-xs italic">
                             Issued by {{ issue.issued_by.name }}
                         </p>
+                        <p v-if="userOnline"
+                        class="pt-2 text-sm font-light text-green-500">
+                             Online
+                        </p>
                     </div>
 
 
@@ -172,14 +176,21 @@ export default {
         window.Echo
        .join(`Chat.${this.issue.id}`)
        .here(users => {
-             console.log('You have just joined the channel.');
-             console.log(users);
+             users.forEach(user => {
+                if (user.id == this.issue.issued_by.id) {
+                this.userOnline=true;
+                 }
+             });
             })
         .joining(user => {
-        console.log('A new user joined the channel: ', user);
+            if (user.id == this.issue.issued_by.id) {
+                this.userOnline=true;
+             }
         })
         .leaving(user => {
-            console.log('A user left the channel: ', user);
+            if (user.id == this.issue.issued_by.id) {
+              this.userOnline=false;
+            }
         })
         .listen('.new-message', (e) => {
             this.messages.push({
@@ -207,6 +218,7 @@ export default {
             input_message: null,
             closeIssueForm:Object,
             moment: moment,
+            userOnline:false,
         }
     },
     computed:{
