@@ -6,6 +6,51 @@ End users which can be clients or any end user are required to be registered and
 
 This project is made of laravel and mysql in the back-end and front-end with vue.js and tailwind css
 
+## Screenshots
+<div style="display:flex;">
+<img
+  src="public/images/screenshots/img1.png"
+  alt="Alt text"
+  title="TicketHub"
+  style="display: inline-block;  margin-right: 1rem; max-width: 300px">
+
+<img
+  src="public/images/screenshots/img2.png"
+  alt="Alt text"
+  title="TicketHub"
+  style="display: inline-block; margin-right: 1rem; max-width: 300px">
+</div>
+
+<div style="display:flex; margin-top:1.5rem;">
+<img
+  src="public/images/screenshots/img3.png"
+  alt="Alt text"
+  title="TicketHub"
+  style="display: inline-block;  margin-right: 1rem; max-width: 300px">
+
+<img
+  src="public/images/screenshots/img4.png"
+  alt="Alt text"
+  title="TicketHub"
+  style="display: inline-block; margin-right: 1rem; max-width: 300px">
+</div>
+
+<div style="display:flex; margin-top:1.5rem;">
+<img
+  src="public/images/screenshots/img5.png"
+  alt="Alt text"
+  title="TicketHub"
+  style="display: inline-block;  margin-right: 1rem; max-width: 300px">
+
+<img
+  src="public/images/screenshots/img6.png"
+  alt="Alt text"
+  title="TicketHub"
+  style="display: inline-block; margin-right: 1rem; max-width: 300px">
+</div>
+
+
+
 ## Installation
 This project requires
 
@@ -60,8 +105,11 @@ Customer service team users feautures
  - Issues closed
  - Issues open
 
+ ## Working With Live Chats
+Messages sent in the issues chat can be configured to be live(received to the end user in realtime) to allow realtime messages in issue chat navigate to the config directory inside the app.php change the live chat configuration to true.
+By default live chats are disabled
+
 ### Upcoming feautures
-- Implement live chatting
 - Dashboard
 - Document attachment in chats
 
