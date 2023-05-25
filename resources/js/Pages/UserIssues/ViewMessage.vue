@@ -121,7 +121,7 @@ export default {
         Head, AuthLayout,Link
     },
     mounted(){
-        if (this.issue.status !=3) {
+        if (this.issue.status !=3 || this.live_chat) {
             window.Echo
                 .join(`Chat.${this.issue.id}`)
                 .here(users => {
@@ -157,6 +157,7 @@ export default {
     props:{
         issue : Object,
         messages: Object,
+        live_chat: Boolean,
     },
     data(){
         return {

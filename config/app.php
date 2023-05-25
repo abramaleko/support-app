@@ -212,4 +212,16 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Issues Live Chat
+    |--------------------------------------------------------------------------
+    |
+    | This determines if chat messages in issues should be live meaning
+    | messages will be live
+    | By default is set to false you can enable this for live chat but you
+    | need to configure your broadcaster i.e pusher,soketi in the .env file
+    */
+
+    'live_chat' => false,
 ];

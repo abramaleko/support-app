@@ -58,6 +58,7 @@ class StaffIssuesController extends Controller
         return Inertia::render('StaffIssues/ViewMessage',[
             'issue' => $issue,
             'messages' =>$messages,
+            'live_chat' => config('app.live_chat')
         ]);
      }
 
@@ -82,7 +83,9 @@ class StaffIssuesController extends Controller
         $chat->text=$request->text;
         $chat->save();
 
-        broadcast(new Chat($request->issue_id, $request->text,$user))->toOthers();
+        if (config('app.live_chat')) {
+            broadcast(new Chat($request->issue_id, $request->text,$user))->toOthers();
+        }
 
         return to_route('staff.view-message',$request->issue_code);
      }
